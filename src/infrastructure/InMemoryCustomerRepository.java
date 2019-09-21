@@ -9,8 +9,8 @@ import java.util.Optional;
 
 public class InMemoryCustomerRepository implements CustomerRepository {
 
+    private List<Customer> customers = new ArrayList<>();
     private static InMemoryCustomerRepository instance = null;
-
     private InMemoryCustomerRepository() { }
 
     public static InMemoryCustomerRepository getInstance() {
@@ -22,8 +22,6 @@ public class InMemoryCustomerRepository implements CustomerRepository {
         }
         return instance;
     }
-
-    private List<Customer> customers = new ArrayList<>();
 
     @Override
     public void add(Customer c) {
