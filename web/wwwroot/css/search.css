@@ -1,0 +1,19 @@
+.search {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.filter {
+    margin-top: 50px;
+}
+
+.restaurants {
+    width: 60%;
+}
+
+.restaurant {
+    display: flex;
+    justify-content: space-between;
+}
