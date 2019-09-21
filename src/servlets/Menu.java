@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import static servlets.Routes.*;
 
@@ -20,6 +21,9 @@ public class Menu extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        domain.Menu menu = menuRepository.findByRestaurantId(req.getParameter("restaurant")).get();
+        req.setAttribute("menu", menu);
+        req.getSession().getAttribute("search");
         getServletContext().getRequestDispatcher("/WEB-INF" + MENU_JSP).forward(req, resp);
     }
 

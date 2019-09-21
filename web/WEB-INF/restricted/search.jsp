@@ -21,7 +21,7 @@
 		<form action="" id="form" method="post">
 			<div class="field">
 				<div class="control">
-					<input class="input is-primary" value="${param.type}"
+					<input class="input is-primary" value="<%= request.getSession().getAttribute("search") != null ? request.getSession().getAttribute("search") : "" %>"
 						   type="text" name="type" placeholder="Votre recherche">
 				</div>
 			</div>
@@ -34,7 +34,7 @@
 
 	<div class="restaurants">
 
-		<% if (request.getAttribute("searched") != null) {
+		<% if (request.getAttribute("restaurants") != null) {
 			for (Restaurant restaurant : (List<Restaurant>) request.getAttribute("restaurants")) { %>
 
 		<div class="box">
@@ -52,7 +52,8 @@
 							<p><%= restaurant.getShippingTime() %>
 							</p>
 						</div>
-						<a href="${pageContext.request.contextPath}/restricted/menu?restaurant=<%= restaurant.getId() %>" class="button is-primary">
+						<a href="${pageContext.request.contextPath}/restricted/menu?restaurant=<%= restaurant.getId() %>"
+						   class="button is-primary">
 							Voir menu
 						</a>
 					</div>

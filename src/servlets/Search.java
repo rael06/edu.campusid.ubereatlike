@@ -22,14 +22,21 @@ public class Search extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String type = req.getSession().getAttribute("search") != null ?
+                (String) req.getSession().getAttribute("search") : null;
+        if (type != null) {
+            List<Restaurant> restaurants = restaurantRepository.findByType(type);
+            req.setAttribute("restaurants", restaurants);
+        }
         getServletContext().getRequestDispatcher("/WEB-INF" + SEARCH_JSP).forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Restaurant> restaurants = restaurantRepository.findByType(req.getParameter("type"));
+        String type = req.getParameter("type");
+        req.getSession().setAttribute("search", type);
+        List<Restaurant> restaurants = restaurantRepository.findByType(type);
         req.setAttribute("restaurants", restaurants);
-        req.setAttribute("searched", req.getParameter("searched"));
         getServletContext().getRequestDispatcher("/WEB-INF" + SEARCH_JSP).forward(req, resp);
     }
 }
