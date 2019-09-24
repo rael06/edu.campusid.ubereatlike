@@ -1,11 +1,12 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCart {
     private static int id = 0;
     private String customerId;
-    private List<String> items;
+    private List<String> items = new ArrayList<>();
 
     public ShoppingCart(String customerId) {
         ShoppingCart.id++;

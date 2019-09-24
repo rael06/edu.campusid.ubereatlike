@@ -23,7 +23,7 @@ public class Menu extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String restaurantId = req.getParameter("restaurant");
+        String restaurantId = req.getParameter("restaurant") != null ? req.getParameter("restaurant") : (String) req.getAttribute("restaurant");
         List<domain.Menu> menus = menuRepository.findByRestaurantId(restaurantId);
         req.setAttribute("menus", menus);
         req.setAttribute("restaurantId", restaurantId);
@@ -31,8 +31,8 @@ public class Menu extends HttpServlet {
         if (req.getParameter("order") != null) {
             ((ShoppingCart) req.getSession().getAttribute("cart")).addItem(req.getParameter("order"));
             resp.sendRedirect(req.getContextPath() + MENU);
-        }
-        getServletContext().getRequestDispatcher("/WEB-INF" + MENU_JSP).forward(req, resp);
+        } else
+            getServletContext().getRequestDispatcher("/WEB-INF" + MENU_JSP).forward(req, resp);
     }
 
     @Override
