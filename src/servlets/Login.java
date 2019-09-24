@@ -1,6 +1,7 @@
 package servlets;
 
 import domain.Customer;
+import domain.ShoppingCart;
 import domain.repositories.CustomerRepository;
 import infrastructure.InMemoryCustomerRepository;
 
@@ -28,8 +29,10 @@ public class Login extends HttpServlet {
 
         Optional<Customer> customer = customerRepository.findByEmailAndPassword(email, password);
         if (customer.isPresent()) {
+            ShoppingCart sc = new ShoppingCart(customer.get().getId());
             session.setAttribute("authenticated", true);
-            req.getSession().setAttribute("customer", customer.get());
+            session.setAttribute("customer", customer.get());
+            session.setAttribute("cart", sc);
             resp.sendRedirect(req.getContextPath() + SEARCH);
         } else {
             getServletContext().getRequestDispatcher(INDEX_JSP).forward(req, resp);

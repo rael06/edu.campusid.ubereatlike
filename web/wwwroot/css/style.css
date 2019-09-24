@@ -3,6 +3,22 @@ html, body {
     padding: 0;
     border-collapse: collapse;
     display: flex;
+    flex-direction: column;
     height: 100%;
     width: 100%;
+}
+
+/* header */
+header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.userInfo {
+    display: flex;
+}
+
+.userInfo > p:first-of-type {
+    margin-right: 20px;
 }

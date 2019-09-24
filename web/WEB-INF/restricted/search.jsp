@@ -1,5 +1,3 @@
-<%@ page import="domain.Customer" %>
-<%@ page import="java.util.Optional" %>
 <%@ page import="domain.Restaurant" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
@@ -16,6 +14,7 @@
 	<%@include file="../head.jsp" %>
 </head>
 <body>
+<%@include file="header.jsp"%>
 <section class="search">
 	<div class="filter">
 		<form action="" id="form" method="post">
