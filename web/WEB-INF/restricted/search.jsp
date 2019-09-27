@@ -16,6 +16,7 @@
 <body>
 <%@include file="header.jsp"%>
 <section class="search">
+	<h1>Accueil</h1>
 	<div class="filter">
 		<form action="" id="form" method="post">
 			<div class="field">

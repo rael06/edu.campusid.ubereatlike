@@ -12,7 +12,6 @@ public class ShoppingCart {
 
     public ShoppingCart(String customerId) {
         id++;
-        System.out.println("id : " + id);
         orderId = id;
         this.customerId = customerId;
     }

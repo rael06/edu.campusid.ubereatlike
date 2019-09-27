@@ -15,6 +15,7 @@
 <body>
 <%@include file="header.jsp" %>
 <section class="pay">
+	<h1>Confirmation de commande</h1>
 	<p>Commande n°<%= ((ShoppingCart) request.getSession().getAttribute("lastCart")).getOrderId() %> confirmée</p>
 	<a href="${pageContext.request.contextPath}/restricted/search" class="button is-primary">
 		Retour à l'accueil

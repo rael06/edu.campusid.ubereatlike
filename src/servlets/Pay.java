@@ -1,9 +1,5 @@
 package servlets;
 
-
-import domain.Customer;
-import domain.ShoppingCart;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

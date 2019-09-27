@@ -6,6 +6,7 @@ import domain.repositories.ShoppingCartRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class InMemoryShoppingCartRepository implements ShoppingCartRepository {
     private static InMemoryShoppingCartRepository instance = null;
@@ -30,6 +31,6 @@ public class InMemoryShoppingCartRepository implements ShoppingCartRepository {
 
     @Override
     public List<ShoppingCart> findByCustomerId(String customerId) {
-        return null;
+        return shoppingCarts.stream().filter(sc-> sc.getCustomerId().equals(customerId)).collect(Collectors.toList());
     }
 }

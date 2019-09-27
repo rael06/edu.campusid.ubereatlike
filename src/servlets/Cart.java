@@ -3,6 +3,8 @@ package servlets;
 import domain.Customer;
 import domain.ShoppingCart;
 import domain.ShoppingCartItem;
+import domain.repositories.ShoppingCartRepository;
+import infrastructure.InMemoryShoppingCartRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -51,6 +53,7 @@ public class Cart extends HttpServlet {
 
         if (req.getParameter("cartPayButton") != null) {
             ShoppingCart lastCart = (ShoppingCart) req.getSession().getAttribute("cart");
+            InMemoryShoppingCartRepository.getInstance().add(lastCart);
             req.getSession().setAttribute("lastCart", lastCart);
             req.getSession().setAttribute("cart", new ShoppingCart(((Customer) req.getSession().getAttribute("customer")).getId()));
             resp.sendRedirect(req.getContextPath() + PAY);

@@ -15,6 +15,7 @@
 
 <body>
 <section class="login">
+	<h1>Connexion</h1>
 	<form action="./login" method="post">
 <%--		<% if (request.setAttribute("error") != null) { %>--%>
 <%--		<div class="notification is-danger">--%>

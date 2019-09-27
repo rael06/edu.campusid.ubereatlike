@@ -1,0 +1,44 @@
+.orders {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.carts {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cart {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.orders .image {
+    margin: 0 !important;
+}
+
+.orders h2 {
+    font-size: 30px;
+}
+
+.orders h3 {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.goBack {
+    margin-top: 20px;
+}

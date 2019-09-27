@@ -17,6 +17,7 @@
 <body>
 <%@include file="header.jsp" %>
 <section class="menu">
+	<h1>Menu(s)</h1>
 	<div class="boxes">
 	<% for (Menu m : ((List<Menu>) request.getAttribute("menus"))) { %>
 

@@ -42,7 +42,7 @@ public class InMemoryMenuRepository implements MenuRepository {
                 instance.add(new Menu("3", "Cheeseburger", "4.9", "2", content3));
 
                 //menu 4
-                instance.add(new Menu("4", "Cheeseburger", "4.9", "1", content3));
+                instance.add(new Menu("4", "Kingburger", "5.5", "1", content3));
             }
         }
         return instance;

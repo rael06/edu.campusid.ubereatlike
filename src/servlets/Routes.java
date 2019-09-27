@@ -11,4 +11,6 @@ public class Routes {
     public static final String CART = "/restricted/cart";
     public static final String PAY_JSP = "/restricted/pay.jsp";
     public static final String PAY = "/restricted/pay";
+    public static final String ORDERS_JSP = "/restricted/orders.jsp";
+    public static final String ORDERS = "/restricted/orders";
 }

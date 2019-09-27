@@ -20,6 +20,7 @@
 <body>
 <%@include file="header.jsp" %>
 <section class="cart">
+	<h1>Panier</h1>
 	<form id="form" action="" method="post"></form>
 	<div class="cartInfo">
 		<p>Quantité : <%= request.getAttribute("nbItemsStr") %></p>

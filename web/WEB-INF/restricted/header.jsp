@@ -1,8 +1,8 @@
 <%@ page import="domain.Customer" %>
 <header>
-	<h1>UberEatLike</h1>
+	<h2>UberEatLike</h2>
 	<div class="userInfo">
-		<p><%= ((Customer) request.getSession().getAttribute("customer")).getEmail() %></p>
-		<button><a href="cart">Panier</a></button>
+		<a href="orders"><%= ((Customer) request.getSession().getAttribute("customer")).getEmail() %></a>
+		<a class="button is-primary" href="cart">Panier</a>
 	</div>
 </header>
