@@ -1,43 +1,40 @@
 package domain;
 
 public class ShoppingCartItem {
+    private static int index = 0;
+    private int id;
     private String menuId;
     private String name;
     private String price;
     private static int quantity = 0;
 
     public ShoppingCartItem(String menuId, String name, String price) {
+        index++;
+        id = index;
         this.menuId = menuId;
         this.name = name;
         this.price = price;
         quantity++;
     }
 
-    public String getPrice() {
-        return price;
+    public int getId() {
+        return id;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public static int getQuantity() {
-        return quantity;
+    public Double getPrice() {
+        return Double.parseDouble(price);
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getMenuId() {
         return menuId;
     }
 
-    public void setMenuId(String menuId) {
-        this.menuId = menuId;
+    public static int getQuantity() {
+        return quantity;
     }
+
 }

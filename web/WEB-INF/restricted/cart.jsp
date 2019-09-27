@@ -1,3 +1,6 @@
+<%@ page import="domain.ShoppingCart" %>
+<%@ page import="java.text.DecimalFormat" %>
+<%@ page import="domain.Menu" %>
 <%@ page import="java.util.List" %>
 <%@ page import="domain.ShoppingCartItem" %><%--
   Created by IntelliJ IDEA.
@@ -11,13 +14,47 @@
 <head>
 	<head>
 		<title>Panier</title>
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/wwwroot/css/panier.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/wwwroot/css/cart.css">
 		<%@include file="../head.jsp" %>
 	</head>
 <body>
 <%@include file="header.jsp" %>
 <section class="cart">
-	<p>Quantité : <%= ((List<ShoppingCartItem>) request.getSession().getAttribute("cart")).size() %></p>
+	<div class="cartInfo">
+		<p>Quantité : <%= request.getAttribute("nbItems") %></p>
+		<p>Total : <%= request.getAttribute("price") %> €</p>
+		<a href="${pageContext.request.contextPath}/restricted/pay" class="button is-primary">
+			Payer
+		</a>
+	</div>
+	<div class="cartMenus">
+		<% for (ShoppingCartItem item : (List<ShoppingCartItem>) request.getAttribute("items")) { %>
+		<div class="box">
+			<article class="media">
+				<div class="media-content">
+					<div class="content item">
+						<figure class="image is-64x64">
+							<img src="https://versions.bulma.io/0.7.0/images/placeholders/64x64.png" alt="Image">
+						</figure>
+						<div>
+							<h3><strong><%= item.getName() %>
+							</strong></h3>
+							<p><%= new DecimalFormat("0.00").format(item.getPrice()) %> €</p>
+						</div>
+						<form action="" method="post">
+							<button class="button is-primary orderButton" name="remove"
+									value="<%= item.getId() %>">Retirer
+							</button>
+						</form>
+					</div>
+				</div>
+			</article>
+		</div>
+		<% } %>
+	</div>
+	<a href="${pageContext.request.contextPath}/restricted/menu" class="goBack button is-primary">
+		Retour
+	</a>
 </section>
 
 </body>

@@ -1,0 +1,32 @@
+.cart {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cartInfo {
+    margin: 50px 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart .image {
+    margin: 0!important;
+}
+
+.cartMenus {
+    width: 70%;
+}
+
+.goBack {
+    margin-top: 50px;
+}

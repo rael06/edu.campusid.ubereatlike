@@ -2,10 +2,9 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ShoppingCart {
-    private int nbItems = 0;
-    private int price = 0;
     private String customerId;
     private List<ShoppingCartItem> shoppingCartItems = new ArrayList<>();
 
@@ -13,8 +12,8 @@ public class ShoppingCart {
         this.customerId = customerId;
     }
 
-    public int getPrice() {
-        return price;
+    public Double getPrice() {
+        return new Double(String.valueOf(shoppingCartItems.stream().mapToDouble(item-> item.getPrice().doubleValue()).sum()));
     }
 
     public String getCustomerId() {
@@ -22,7 +21,7 @@ public class ShoppingCart {
     }
 
     public int getNbItems() {
-        return nbItems;
+        return shoppingCartItems.size();
     }
 
     public List<ShoppingCartItem> getShoppingCartItems() {
@@ -31,5 +30,9 @@ public class ShoppingCart {
 
     public void add(ShoppingCartItem item) {
         shoppingCartItems.add(item);
+    }
+
+    public void remove(Optional<ShoppingCartItem> item) {
+        item.ifPresent(shoppingCartItem -> shoppingCartItems.remove(shoppingCartItem));
     }
 }

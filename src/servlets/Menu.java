@@ -3,9 +3,7 @@ package servlets;
 import domain.ShoppingCart;
 import domain.ShoppingCartItem;
 import domain.repositories.MenuRepository;
-import domain.repositories.ShoppingCartRepository;
 import infrastructure.InMemoryMenuRepository;
-import infrastructure.InMemoryShoppingCartRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +20,6 @@ import static servlets.Routes.MENU_JSP;
 public class Menu extends HttpServlet {
 
     private final MenuRepository menuRepository = InMemoryMenuRepository.getInstance();
-    private final ShoppingCartRepository shoppingCartRepository = InMemoryShoppingCartRepository.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -35,17 +32,12 @@ public class Menu extends HttpServlet {
         req.setAttribute("menus", menus);
 
         if (req.getParameter("order") != null) {
-
             domain.Menu menu = menuRepository.findById(req.getParameter("order")).get();
             ShoppingCartItem item = new ShoppingCartItem(menu.getId(), menu.getName(), menu.getPrice());
-            shoppingCartRepository.add(item);
-//            for (String[] mInfo: ((ShoppingCart) req.getSession().getAttribute("cart")).getItems()){
-//                System.out.println(mInfo[0] + " " + mInfo[1]);
-//            }
-            req.getSession().setAttribute("cart", shoppingCartRepository.getShoppingCartItems());
-            resp.sendRedirect(req.getContextPath() + MENU);
-        } else
-            getServletContext().getRequestDispatcher("/WEB-INF" + MENU_JSP).forward(req, resp);
+            ((ShoppingCart) req.getSession().getAttribute("cart")).add(item);
+        }
+
+        getServletContext().getRequestDispatcher("/WEB-INF" + MENU_JSP).forward(req, resp);
     }
 
     @Override
