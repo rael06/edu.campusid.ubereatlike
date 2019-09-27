@@ -1,7 +1,10 @@
 package domain.repositories;
 
-import domain.ShoppingCart;
+import domain.ShoppingCartItem;
+
+import java.util.List;
 
 public interface ShoppingCartRepository {
-    void add(ShoppingCart sc);
+    void add(ShoppingCartItem item);
+    List<ShoppingCartItem> getShoppingCartItems();
 }

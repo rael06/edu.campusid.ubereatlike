@@ -57,4 +57,11 @@ public class InMemoryMenuRepository implements MenuRepository {
     public List<Menu> findByRestaurantId(String restaurantId) {
         return menus.stream().filter(menu -> menu.getRestaurantId().equals(restaurantId)).collect(Collectors.toList());
     }
+
+    @Override
+    public Optional<Menu> findById(String id) {
+        return menus.stream().filter(menu -> menu.getId().equals(id)).findFirst();
+    }
+
+
 }

@@ -4,30 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCart {
-    private static int id = 0;
+    private int nbItems = 0;
+    private int price = 0;
     private String customerId;
-    private List<String> items = new ArrayList<>();
+    private List<ShoppingCartItem> shoppingCartItems = new ArrayList<>();
 
     public ShoppingCart(String customerId) {
-        ShoppingCart.id++;
         this.customerId = customerId;
+    }
+
+    public int getPrice() {
+        return price;
     }
 
     public String getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
+    public int getNbItems() {
+        return nbItems;
     }
 
-    public List<String> getItems() {
-        return items;
+    public List<ShoppingCartItem> getShoppingCartItems() {
+        return shoppingCartItems;
     }
 
-    public void addItem(String menuId) {
-        items.add(menuId);
+    public void add(ShoppingCartItem item) {
+        shoppingCartItems.add(item);
     }
-
-
 }

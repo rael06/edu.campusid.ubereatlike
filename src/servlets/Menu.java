@@ -1,9 +1,11 @@
 package servlets;
 
-import domain.Customer;
 import domain.ShoppingCart;
+import domain.ShoppingCartItem;
 import domain.repositories.MenuRepository;
+import domain.repositories.ShoppingCartRepository;
 import infrastructure.InMemoryMenuRepository;
+import infrastructure.InMemoryShoppingCartRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,16 +22,27 @@ import static servlets.Routes.MENU_JSP;
 public class Menu extends HttpServlet {
 
     private final MenuRepository menuRepository = InMemoryMenuRepository.getInstance();
+    private final ShoppingCartRepository shoppingCartRepository = InMemoryShoppingCartRepository.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String restaurantId = req.getParameter("restaurant") != null ? req.getParameter("restaurant") : (String) req.getAttribute("restaurant");
+        if (req.getSession().getAttribute("restaurantId") == null)
+            req.getSession().setAttribute("restaurantId", req.getParameter("restaurant"));
+
+        String restaurantId = (String) req.getSession().getAttribute("restaurantId");
+
         List<domain.Menu> menus = menuRepository.findByRestaurantId(restaurantId);
         req.setAttribute("menus", menus);
-        req.setAttribute("restaurantId", restaurantId);
-        req.getSession().getAttribute("search");
+
         if (req.getParameter("order") != null) {
-            ((ShoppingCart) req.getSession().getAttribute("cart")).addItem(req.getParameter("order"));
+
+            domain.Menu menu = menuRepository.findById(req.getParameter("order")).get();
+            ShoppingCartItem item = new ShoppingCartItem(menu.getId(), menu.getName(), menu.getPrice());
+            shoppingCartRepository.add(item);
+//            for (String[] mInfo: ((ShoppingCart) req.getSession().getAttribute("cart")).getItems()){
+//                System.out.println(mInfo[0] + " " + mInfo[1]);
+//            }
+            req.getSession().setAttribute("cart", shoppingCartRepository.getShoppingCartItems());
             resp.sendRedirect(req.getContextPath() + MENU);
         } else
             getServletContext().getRequestDispatcher("/WEB-INF" + MENU_JSP).forward(req, resp);
