@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 public class InMemoryRestaurantRepository implements RestaurantRepository {
     private static InMemoryRestaurantRepository instance = null;
 
+    private List<Restaurant> restaurants = new ArrayList<>();
+
     private InMemoryRestaurantRepository() { }
 
     public static InMemoryRestaurantRepository getInstance() {
@@ -24,8 +26,6 @@ public class InMemoryRestaurantRepository implements RestaurantRepository {
         return instance;
     }
 
-    private List<Restaurant> restaurants = new ArrayList<>();
-
     @Override
     public void add(Restaurant r) {
         restaurants.add(r);
@@ -33,7 +33,7 @@ public class InMemoryRestaurantRepository implements RestaurantRepository {
 
     @Override
     public List<Restaurant> findByType(String type) {
-        return restaurants.stream().filter(r -> r.getType().toLowerCase().equals(type.toLowerCase()))
+        return restaurants.stream().filter(r -> r.getType().toLowerCase().equals(type.toLowerCase().trim()))
                 .collect(Collectors.toList());
     }
 }

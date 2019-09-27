@@ -23,10 +23,7 @@ public class Menu extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getSession().getAttribute("restaurantId") == null)
-            req.getSession().setAttribute("restaurantId", req.getParameter("restaurant"));
-
-        String restaurantId = (String) req.getSession().getAttribute("restaurantId");
+        String restaurantId = req.getParameter("restaurant");
 
         List<domain.Menu> menus = menuRepository.findByRestaurantId(restaurantId);
         req.setAttribute("menus", menus);

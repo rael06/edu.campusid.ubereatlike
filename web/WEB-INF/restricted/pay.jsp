@@ -1,4 +1,4 @@
-<%--
+<%@ page import="domain.ShoppingCart" %><%--
   Created by IntelliJ IDEA.
   User: rael0
   Date: 27/09/2019
@@ -14,8 +14,12 @@
 </head>
 <body>
 <%@include file="header.jsp" %>
+<form action="" method="get" id="form"></form>
 <section class="pay">
-	<p>paiement</p>
+	<p>Commande n°<%= request.getParameter("orderId") %> confirmée</p>
+	<button form="form" class="button is-primary" name="goHome" value="true">
+		Retour à l'accueil
+	</button>
 </section>
 
 </body>

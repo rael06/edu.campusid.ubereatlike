@@ -28,9 +28,11 @@ public class Cart extends HttpServlet {
 
     private void setServletValues(HttpServletRequest req) {
         ShoppingCart cart = ((ShoppingCart) req.getSession().getAttribute("cart"));
+        req.setAttribute("cart", cart);
 
         int nbItems = cart.getNbItems();
-        req.setAttribute("nbItems", String.valueOf(nbItems));
+        req.setAttribute("nbItems", nbItems);
+        req.setAttribute("nbItemsStr", String.valueOf(nbItems));
 
         double price = cart.getPrice();
         req.setAttribute("price", new DecimalFormat("0.00").format(price));

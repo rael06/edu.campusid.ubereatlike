@@ -5,11 +5,20 @@ import java.util.List;
 import java.util.Optional;
 
 public class ShoppingCart {
+    private static int id = 0;
+    private int orderId;
     private String customerId;
     private List<ShoppingCartItem> shoppingCartItems = new ArrayList<>();
 
     public ShoppingCart(String customerId) {
+        id++;
+        System.out.println("id : " + id);
+        orderId = id;
         this.customerId = customerId;
+    }
+
+    public int getOrderId() {
+        return orderId;
     }
 
     public Double getPrice() {

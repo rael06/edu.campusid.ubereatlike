@@ -21,11 +21,14 @@
 <%@include file="header.jsp" %>
 <section class="cart">
 	<div class="cartInfo">
-		<p>Quantité : <%= request.getAttribute("nbItems") %></p>
+		<p>Quantité : <%= request.getAttribute("nbItemsStr") %></p>
 		<p>Total : <%= request.getAttribute("price") %> €</p>
-		<a href="${pageContext.request.contextPath}/restricted/pay" class="button is-primary">
-			Payer
-		</a>
+			<a style="visibility:<%= (int) request.getAttribute("nbItems") > 0 ? "visible" : "hidden" %>"
+					href="${pageContext.request.contextPath}/restricted/pay?orderId=
+					<%= ((ShoppingCart) request.getAttribute("cart")).getOrderId() %>"
+					class="button is-primary">
+				Payer
+			</a>
 	</div>
 	<div class="cartMenus">
 		<% for (ShoppingCartItem item : (List<ShoppingCartItem>) request.getAttribute("items")) { %>
@@ -42,7 +45,7 @@
 							<p><%= new DecimalFormat("0.00").format(item.getPrice()) %> €</p>
 						</div>
 						<form action="" method="post">
-							<button class="button is-primary orderButton" name="remove"
+							<button class="button is-primary" name="remove"
 									value="<%= item.getId() %>">Retirer
 							</button>
 						</form>

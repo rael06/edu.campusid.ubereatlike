@@ -33,7 +33,7 @@
 			</div>
 		</div>
 		<div class="control">
-			<button class="button is-primary">Submit</button>
+			<button class="button is-primary" name="loginButton" value="true">Submit</button>
 		</div>
 	</form>
 </section>

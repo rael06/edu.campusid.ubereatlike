@@ -21,6 +21,18 @@ public class Login extends HttpServlet {
 
     private final CustomerRepository customerRepository = InMemoryCustomerRepository.getInstance();
 
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        if (session.getAttribute("authenticated") != null &&
+                (Boolean) session.getAttribute("authenticated")) {
+            resp.sendRedirect(req.getContextPath() + SEARCH_JSP);
+        } else {
+            getServletContext().getRequestDispatcher(INDEX_JSP).forward(req, resp);
+        }
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
@@ -29,22 +41,13 @@ public class Login extends HttpServlet {
 
         Optional<Customer> customer = customerRepository.findByEmailAndPassword(email, password);
         if (customer.isPresent()) {
-            ShoppingCart sc = new ShoppingCart(customer.get().getId());
+            if (session.getAttribute("cart") == null) {
+                ShoppingCart sc = new ShoppingCart(customer.get().getId());
+                session.setAttribute("cart", sc);
+            }
             session.setAttribute("authenticated", true);
             session.setAttribute("customer", customer.get());
-            session.setAttribute("cart", sc);
             resp.sendRedirect(req.getContextPath() + SEARCH);
-        } else {
-            getServletContext().getRequestDispatcher(INDEX_JSP).forward(req, resp);
-        }
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        if (session.getAttribute("authenticated") != null &&
-                (Boolean) session.getAttribute("authenticated")) {
-            resp.sendRedirect(req.getContextPath() + SEARCH_JSP);
         } else {
             getServletContext().getRequestDispatcher(INDEX_JSP).forward(req, resp);
         }
