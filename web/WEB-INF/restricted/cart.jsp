@@ -20,15 +20,16 @@
 <body>
 <%@include file="header.jsp" %>
 <section class="cart">
+	<form id="form" action="" method="post"></form>
 	<div class="cartInfo">
 		<p>Quantité : <%= request.getAttribute("nbItemsStr") %></p>
 		<p>Total : <%= request.getAttribute("price") %> €</p>
-			<a style="visibility:<%= (int) request.getAttribute("nbItems") > 0 ? "visible" : "hidden" %>"
-					href="${pageContext.request.contextPath}/restricted/pay?orderId=
-					<%= ((ShoppingCart) request.getAttribute("cart")).getOrderId() %>"
-					class="button is-primary">
-				Payer
-			</a>
+		<button style="visibility:<%= (int) request.getAttribute("nbItems") > 0 ? "visible" : "hidden" %>"
+				name="cartPayButton" form="form"
+				value="<%= ((ShoppingCart) request.getAttribute("cart")).getOrderId() %>"
+				class="button is-primary">
+			Payer
+		</button>
 	</div>
 	<div class="cartMenus">
 		<% for (ShoppingCartItem item : (List<ShoppingCartItem>) request.getAttribute("items")) { %>
@@ -44,11 +45,9 @@
 							</strong></h3>
 							<p><%= new DecimalFormat("0.00").format(item.getPrice()) %> €</p>
 						</div>
-						<form action="" method="post">
-							<button class="button is-primary" name="remove"
-									value="<%= item.getId() %>">Retirer
-							</button>
-						</form>
+						<button class="button is-primary" name="remove" form="form"
+								value="<%= item.getId() %>">Retirer
+						</button>
 					</div>
 				</div>
 			</article>

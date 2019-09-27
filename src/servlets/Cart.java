@@ -1,5 +1,6 @@
 package servlets;
 
+import domain.Customer;
 import domain.ShoppingCart;
 import domain.ShoppingCartItem;
 
@@ -13,8 +14,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import static servlets.Routes.CART;
-import static servlets.Routes.CART_JSP;
+import static servlets.Routes.*;
 
 @WebServlet(CART)
 public class Cart extends HttpServlet {
@@ -48,6 +48,14 @@ public class Cart extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         setServletValues(req);
+
+        if (req.getParameter("cartPayButton") != null) {
+            ShoppingCart lastCart = (ShoppingCart) req.getSession().getAttribute("cart");
+            req.getSession().setAttribute("lastCart", lastCart);
+            req.getSession().setAttribute("cart", new ShoppingCart(((Customer) req.getSession().getAttribute("customer")).getId()));
+            resp.sendRedirect(req.getContextPath() + PAY);
+            return;
+        }
 
         resp.sendRedirect(req.getContextPath() + CART);
     }

@@ -18,10 +18,6 @@ import static servlets.Routes.*;
 public class Pay extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getSession().setAttribute("cart", new ShoppingCart(((Customer) req.getSession().getAttribute("customer")).getId()));
-        if (req.getParameter("goHome") != null) {
-            resp.sendRedirect(req.getContextPath() + SEARCH);
-        } else
-            getServletContext().getRequestDispatcher("/WEB-INF" + PAY_JSP).forward(req, resp);
+        getServletContext().getRequestDispatcher("/WEB-INF" + PAY_JSP).forward(req, resp);
     }
 }

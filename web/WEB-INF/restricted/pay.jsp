@@ -14,12 +14,11 @@
 </head>
 <body>
 <%@include file="header.jsp" %>
-<form action="" method="get" id="form"></form>
 <section class="pay">
-	<p>Commande n°<%= request.getParameter("orderId") %> confirmée</p>
-	<button form="form" class="button is-primary" name="goHome" value="true">
+	<p>Commande n°<%= ((ShoppingCart) request.getSession().getAttribute("lastCart")).getOrderId() %> confirmée</p>
+	<a href="${pageContext.request.contextPath}/restricted/search" class="button is-primary">
 		Retour à l'accueil
-	</button>
+	</a>
 </section>
 
 </body>

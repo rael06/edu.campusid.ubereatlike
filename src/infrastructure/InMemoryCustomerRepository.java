@@ -17,7 +17,7 @@ public class InMemoryCustomerRepository implements CustomerRepository {
         if (instance == null) {
             synchronized (InMemoryCustomerRepository.class) {
                 instance = instance == null ? new InMemoryCustomerRepository() : instance;
-                instance.add(new Customer("0", "rael06@hotmail.fr", "pass"));
+                instance.add(new Customer("1", "rael06@hotmail.fr", "pass"));
             }
         }
         return instance;
